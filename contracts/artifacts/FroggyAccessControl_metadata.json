@@ -1,0 +1,67 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_admin",
+						"type": "address"
+					}
+				],
+				"name": "setAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"setAdmin(address)": {
+					"details": "Assigns a new address as the admin. Only available to the current admin.",
+					"params": {
+						"_admin": "The address of the new admin"
+					}
+				}
+			},
+			"title": "FroggyAccessControl Facet that manages administrative access to certain aspects of the game.",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/FroggyAccessControl.sol": "FroggyAccessControl"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/FroggyAccessControl.sol": {
+			"keccak256": "0xf4e41a66a073b0163f5dcc992569aa2b125a66dbdb7762cda207b8cb0cfa1270",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://183efdc41876957419464235e9a7b4eaa07195447053f44acebd2aace19f0b2f",
+				"dweb:/ipfs/QmNhKZHAN9LnSRVAtZ7RZkjghhW24fQrGJW93GdN14TWSQ"
+			]
+		}
+	},
+	"version": 1
+}

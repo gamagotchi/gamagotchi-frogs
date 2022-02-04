@@ -9,14 +9,10 @@ pragma solidity ^0.8.0;
 contract FroggyAccessControl {
 
     address admin;
-
-    constructor(address _admin) {
-        admin = _admin;
-    }
     
     /// @dev Modifer for functions only accessible to the admin.
     modifier onlyAdmin() {
-        require(msg.sender == admin);
+        require(msg.sender == admin, "No admin access");
         _;
     }
 

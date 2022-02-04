@@ -9,7 +9,7 @@ import "./GeneMixerInterface.sol";
  * @title FroggyOwnership
  * Facet that manages breeding of frogs
  */
-abstract contract FroggyBreeding is FroggyOwnership {
+contract FroggyBreeding is FroggyOwnership {
 
     GeneMixerInterface private geneMixer;
 

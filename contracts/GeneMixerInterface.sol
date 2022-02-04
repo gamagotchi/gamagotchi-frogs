@@ -16,5 +16,5 @@ abstract contract GeneMixerInterface {
         _;
     }
 
-    function mixGenes(uint256 gene1, uint256 gene2) virtual public view returns (uint256);
+    function mixGenes(uint192 gene1, uint192 gene2) virtual public view returns (uint192);
 }
