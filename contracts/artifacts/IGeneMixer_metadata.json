@@ -1,0 +1,215 @@
+{
+	"compiler": {
+		"version": "0.8.6+commit.11564f7e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "gameAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint16",
+								"name": "head",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "eyes",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "body",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "accessory",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint8",
+								"name": "color",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint8",
+								"name": "eyeColor",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct FroggyBase.genes",
+						"name": "gene1",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint16",
+								"name": "head",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "eyes",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "body",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "accessory",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint8",
+								"name": "color",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint8",
+								"name": "eyeColor",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct FroggyBase.genes",
+						"name": "gene2",
+						"type": "tuple"
+					}
+				],
+				"name": "mixGenes",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint16",
+								"name": "head",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "eyes",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "body",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "accessory",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint8",
+								"name": "color",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint8",
+								"name": "eyeColor",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct FroggyBase.genes",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_admin",
+						"type": "address"
+					}
+				],
+				"name": "setAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"setAdmin(address)": {
+					"details": "Assigns a new address as the admin. Only available to the current admin.",
+					"params": {
+						"_admin": "The address of the new admin"
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/IGeneMixer.sol": "IGeneMixer"
+		},
+		"evmVersion": "berlin",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/FroggyAccessControl.sol": {
+			"keccak256": "0xf4e41a66a073b0163f5dcc992569aa2b125a66dbdb7762cda207b8cb0cfa1270",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://183efdc41876957419464235e9a7b4eaa07195447053f44acebd2aace19f0b2f",
+				"dweb:/ipfs/QmNhKZHAN9LnSRVAtZ7RZkjghhW24fQrGJW93GdN14TWSQ"
+			]
+		},
+		"contracts/FroggyBase.sol": {
+			"keccak256": "0xa77e16e358bfa30e9ba08f3f8aaa79ba27bf0b422b8e0ba0f4811cd2048e3d29",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://b2ebbb2d629bc9bdc0115ea0a65161e823fc51231b3bdb2617089040a9d98110",
+				"dweb:/ipfs/QmTB7Zwzfu5Lo5x4ZVPVosrMeBM9EwZEy5TNKkPcXnZXPA"
+			]
+		},
+		"contracts/IGeneMixer.sol": {
+			"keccak256": "0xcf894e7dfaf3307c94fa9fee1d83fcb381e8fd165af0447772714fd75bfdaecb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://72378cdf20d50141da939e70b652fd65778c9c25f4deef68da139f95a1b64a3f",
+				"dweb:/ipfs/QmaMomZLzZq9tYfffGQkMHAFVS9bzNw58imEKkgReVRt6s"
+			]
+		}
+	},
+	"version": 1
+}

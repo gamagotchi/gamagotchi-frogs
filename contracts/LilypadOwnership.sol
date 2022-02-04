@@ -11,10 +11,8 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 abstract contract LilypadOwnership is ERC1155 {
     uint8 constant LILYPAD = 0;
 
-    // TODO: implement actual tokenomics
-    
-    // @dev For testing purposes
-    function mintLilypads(uint256 _amount) external {
+    /// @dev Mint Lilypads
+    function _mintLilypads(uint256 _amount) internal {
         _mint(msg.sender, LILYPAD, _amount, "");
     }
 }

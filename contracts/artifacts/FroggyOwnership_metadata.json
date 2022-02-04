@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.6+commit.11564f7e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -11,7 +11,32 @@
 					{
 						"indexed": true,
 						"internalType": "address",
-						"name": "account",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "approved",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
 						"type": "address"
 					},
 					{
@@ -36,12 +61,6 @@
 					{
 						"indexed": true,
 						"internalType": "address",
-						"name": "operator",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
 						"name": "from",
 						"type": "address"
 					},
@@ -52,88 +71,39 @@
 						"type": "address"
 					},
 					{
-						"indexed": false,
-						"internalType": "uint256[]",
-						"name": "ids",
-						"type": "uint256[]"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256[]",
-						"name": "values",
-						"type": "uint256[]"
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
 					}
 				],
-				"name": "TransferBatch",
+				"name": "Transfer",
 				"type": "event"
 			},
 			{
-				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "operator",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "from",
-						"type": "address"
-					},
-					{
-						"indexed": true,
 						"internalType": "address",
 						"name": "to",
 						"type": "address"
 					},
 					{
-						"indexed": false,
 						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "value",
+						"name": "tokenId",
 						"type": "uint256"
 					}
 				],
-				"name": "TransferSingle",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "value",
-						"type": "string"
-					},
-					{
-						"indexed": true,
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					}
-				],
-				"name": "URI",
-				"type": "event"
+				"name": "approve",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "account",
+						"name": "owner",
 						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
 					}
 				],
 				"name": "balanceOf",
@@ -150,41 +120,17 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address[]",
-						"name": "accounts",
-						"type": "address[]"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "ids",
-						"type": "uint256[]"
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
 					}
 				],
-				"name": "balanceOfBatch",
+				"name": "getApproved",
 				"outputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "",
-						"type": "uint256[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_account",
-						"type": "address"
-					}
-				],
-				"name": "getFrogsEncoded",
-				"outputs": [
-					{
-						"internalType": "bytes",
 						"name": "",
-						"type": "bytes"
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -198,12 +144,61 @@
 						"type": "uint32"
 					}
 				],
-				"name": "getGenes",
+				"name": "getFrog",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"components": [
+							{
+								"components": [
+									{
+										"internalType": "uint16",
+										"name": "head",
+										"type": "uint16"
+									},
+									{
+										"internalType": "uint16",
+										"name": "eyes",
+										"type": "uint16"
+									},
+									{
+										"internalType": "uint16",
+										"name": "body",
+										"type": "uint16"
+									},
+									{
+										"internalType": "uint16",
+										"name": "accessory",
+										"type": "uint16"
+									},
+									{
+										"internalType": "uint8",
+										"name": "color",
+										"type": "uint8"
+									},
+									{
+										"internalType": "uint8",
+										"name": "eyeColor",
+										"type": "uint8"
+									}
+								],
+								"internalType": "struct FroggyBase.genes",
+								"name": "genes",
+								"type": "tuple"
+							},
+							{
+								"internalType": "uint32[2]",
+								"name": "parentIds",
+								"type": "uint32[2]"
+							},
+							{
+								"internalType": "uint16",
+								"name": "generation",
+								"type": "uint16"
+							}
+						],
+						"internalType": "struct FroggyBase.Frog",
 						"name": "",
-						"type": "uint256"
+						"type": "tuple"
 					}
 				],
 				"stateMutability": "view",
@@ -213,7 +208,7 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "account",
+						"name": "owner",
 						"type": "address"
 					},
 					{
@@ -234,24 +229,75 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "name",
+				"outputs": [
 					{
-						"internalType": "uint256",
-						"name": "_amount",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "",
+						"type": "string"
 					}
 				],
-				"name": "mintLilypads",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_genes",
+						"name": "tokenId",
 						"type": "uint256"
+					}
+				],
+				"name": "ownerOf",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint16",
+								"name": "head",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "eyes",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "body",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint16",
+								"name": "accessory",
+								"type": "uint16"
+							},
+							{
+								"internalType": "uint8",
+								"name": "color",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint8",
+								"name": "eyeColor",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct FroggyBase.genes",
+						"name": "_genes",
+						"type": "tuple"
 					}
 				],
 				"name": "releaseFrog",
@@ -272,22 +318,12 @@
 						"type": "address"
 					},
 					{
-						"internalType": "uint256[]",
-						"name": "ids",
-						"type": "uint256[]"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "amounts",
-						"type": "uint256[]"
-					},
-					{
-						"internalType": "bytes",
-						"name": "data",
-						"type": "bytes"
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
 					}
 				],
-				"name": "safeBatchTransferFrom",
+				"name": "safeTransferFrom",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -306,17 +342,12 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
+						"name": "tokenId",
 						"type": "uint256"
 					},
 					{
 						"internalType": "bytes",
-						"name": "data",
+						"name": "_data",
 						"type": "bytes"
 					}
 				],
@@ -376,14 +407,8 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "uri",
+				"inputs": [],
+				"name": "symbol",
 				"outputs": [
 					{
 						"internalType": "string",
@@ -393,25 +418,82 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenURI",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {
-				"balanceOf(address,uint256)": {
-					"details": "See {IERC1155-balanceOf}. Requirements: - `account` cannot be the zero address."
+				"approve(address,uint256)": {
+					"details": "See {IERC721-approve}."
 				},
-				"balanceOfBatch(address[],uint256[])": {
-					"details": "See {IERC1155-balanceOfBatch}. Requirements: - `accounts` and `ids` must have the same length."
+				"balanceOf(address)": {
+					"details": "See {IERC721-balanceOf}."
+				},
+				"getApproved(uint256)": {
+					"details": "See {IERC721-getApproved}."
+				},
+				"getFrog(uint32)": {
+					"details": "Get frog metadata by id."
 				},
 				"isApprovedForAll(address,address)": {
-					"details": "See {IERC1155-isApprovedForAll}."
+					"details": "See {IERC721-isApprovedForAll}."
 				},
-				"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
-					"details": "See {IERC1155-safeBatchTransferFrom}."
+				"name()": {
+					"details": "See {IERC721Metadata-name}."
 				},
-				"safeTransferFrom(address,address,uint256,uint256,bytes)": {
-					"details": "See {IERC1155-safeTransferFrom}."
+				"ownerOf(uint256)": {
+					"details": "See {IERC721-ownerOf}."
+				},
+				"releaseFrog((uint16,uint16,uint16,uint16,uint8,uint8))": {
+					"details": "Mints a frog. Only available to admin."
+				},
+				"safeTransferFrom(address,address,uint256)": {
+					"details": "See {IERC721-safeTransferFrom}."
+				},
+				"safeTransferFrom(address,address,uint256,bytes)": {
+					"details": "See {IERC721-safeTransferFrom}."
 				},
 				"setAdmin(address)": {
 					"details": "Assigns a new address as the admin. Only available to the current admin.",
@@ -420,16 +502,22 @@
 					}
 				},
 				"setApprovalForAll(address,bool)": {
-					"details": "See {IERC1155-setApprovalForAll}."
+					"details": "See {IERC721-setApprovalForAll}."
 				},
 				"supportsInterface(bytes4)": {
 					"details": "See {IERC165-supportsInterface}."
 				},
-				"uri(uint256)": {
-					"details": "See {IERC1155MetadataURI-uri}. This implementation returns the same URI for *all* token types. It relies on the token type ID substitution mechanism https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP]. Clients calling this function must replace the `\\{id\\}` substring with the actual token type ID."
+				"symbol()": {
+					"details": "See {IERC721Metadata-symbol}."
+				},
+				"tokenURI(uint256)": {
+					"details": "See {IERC721Metadata-tokenURI}."
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "See {IERC721-transferFrom}."
 				}
 			},
-			"title": "FroggyOwnership Facet that manages ERC1155 implementation of frogs",
+			"title": "FroggyOwnership Facet that manages ERC721 implementation of frogs",
 			"version": 1
 		},
 		"userdoc": {
@@ -442,7 +530,7 @@
 		"compilationTarget": {
 			"contracts/FroggyOwnership.sol": "FroggyOwnership"
 		},
-		"evmVersion": "london",
+		"evmVersion": "berlin",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -486,6 +574,54 @@
 				"dweb:/ipfs/QmNoSE6knNfFncdDDLTb3fGR6oSQty1srG96Vsx3E9wQdw"
 			]
 		},
+		"@openzeppelin/contracts/token/ERC721/ERC721.sol": {
+			"keccak256": "0x81c02855bc239e16ec09eee000a8bec691424c715188d6d881037e69c45414c4",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://46e3ecc8920aeb78c362a387520fe28e022cdc6d04256d9e5874eb8ff6868b6d",
+				"dweb:/ipfs/QmdfCTHrV6CZMGiM3KqGF8tWkdNvGpEmWFyy72X1LAHsz2"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+			"keccak256": "0x516a22876c1fab47f49b1bc22b4614491cd05338af8bd2e7b382da090a079990",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a439187f7126d31add4557f82d8aed6be0162007cd7182c48fd934dbab8f3849",
+				"dweb:/ipfs/QmRPLguRFvrRJS7r6F1bcLvsx6q1VrgjEpZafyeL8D7xZh"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+			"keccak256": "0xd5fa74b4fb323776fa4a8158800fec9d5ac0fec0d6dd046dd93798632ada265f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://33017a30a99cc5411a9e376622c31fc4a55cfc6a335e2f57f00cbf24a817ff3f",
+				"dweb:/ipfs/QmWNQtWTPhA7Lo8nbxbc8KFMvZwbFYB8fSeEQ3vuapSV4a"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol": {
+			"keccak256": "0x0a79511df8151b10b0a0004d6a76ad956582d32824af4c0f4886bdbdfe5746e5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://afbedcf17f31db719e6fdc56caa8f458799c5fa2eb94cb1e94ef18f89af85768",
+				"dweb:/ipfs/QmVmqRdBfbgYThpZSoAJ5o9mnAMjx8mCHHjv3Rh8cQAAg3"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol": {
+			"keccak256": "0x483f88fbbb1d6d75000fbe8ce14279b5e6121cd5a29ff5f1b91fed407735a6c3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://51cbe83f9ccd8619d58ca5458ff49c470c656a45856b0e7435eebf5f5d431bf1",
+				"dweb:/ipfs/QmZwR7nwu4hzVJW2m3JTPyjUopoxZUxjYLSgcSK5D4F7E2"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+			"keccak256": "0x75b829ff2f26c14355d1cba20e16fe7b29ca58eb5fef665ede48bc0f9c6c74b9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a0a107160525724f9e1bbbab031defc2f298296dd9e331f16a6f7130cec32146",
+				"dweb:/ipfs/QmemujxSd7gX8A9M8UwmNbz4Ms3U9FG9QfudUgxwvTmPWf"
+			]
+		},
 		"@openzeppelin/contracts/utils/Address.sol": {
 			"keccak256": "0x51b758a8815ecc9596c66c37d56b1d33883a444631a3f916b9fe65cb863ef7c4",
 			"license": "MIT",
@@ -500,6 +636,14 @@
 			"urls": [
 				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
 				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"@openzeppelin/contracts/utils/Strings.sol": {
+			"keccak256": "0x32c202bd28995dd20c4347b7c6467a6d3241c74c8ad3edcbb610cd9205916c45",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8179c356adb19e70d6b31a1eedc8c5c7f0c00e669e2540f4099e3844c6074d30",
+				"dweb:/ipfs/QmWFbivarEobbqhS1go64ootVuHfVohBseerYy9FTEd1W2"
 			]
 		},
 		"@openzeppelin/contracts/utils/introspection/ERC165.sol": {
@@ -527,19 +671,19 @@
 			]
 		},
 		"contracts/FroggyBase.sol": {
-			"keccak256": "0x169b7a41af7f4997973b78e7dffdd1e13d8d42cd3ffc8be1be77bb47dc3dc2c7",
-			"license": "MIT",
+			"keccak256": "0xa77e16e358bfa30e9ba08f3f8aaa79ba27bf0b422b8e0ba0f4811cd2048e3d29",
+			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://bc751e513c6ec1e157fec2a1bbc732650a72a2924f45c71feffaaa824b8929f7",
-				"dweb:/ipfs/QmTv983bo6bNgEdUMMjvRUUn9d35tzshgg5Gg5Yo1u2dvo"
+				"bzz-raw://b2ebbb2d629bc9bdc0115ea0a65161e823fc51231b3bdb2617089040a9d98110",
+				"dweb:/ipfs/QmTB7Zwzfu5Lo5x4ZVPVosrMeBM9EwZEy5TNKkPcXnZXPA"
 			]
 		},
 		"contracts/FroggyOwnership.sol": {
-			"keccak256": "0x7b093a82b073ea4b167ce2ad3f72409c5261ea7f1683f2d55d2a304e49d3a6ee",
+			"keccak256": "0xe847292aa0112db5995eee7c51130985598a290105115422b9ea8cf791421148",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b31f2a6b6fa51406efd93ee9f946bd2556675b647580ac7e56d96a33765b94c6",
-				"dweb:/ipfs/QmTuEKM81yG8QRHLBDJHBAbiZ5n2jmGXapqH1dSKumBSrS"
+				"bzz-raw://0ac7b3d9f46f7a0171ee3df3e69f4ef0210602c53ac373c870cc0458ceaa255c",
+				"dweb:/ipfs/QmQ2eKYJ9FFHueYsTUdFY1iA3CqQPpqNUGX4s84PGNXA7Q"
 			]
 		},
 		"contracts/LilypadOwnership.sol": {

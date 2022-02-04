@@ -2,13 +2,13 @@
 
 pragma solidity ^0.8.0;
 
-abstract contract GeneMixerInterface {
+import "./FroggyBase.sol";
+
+abstract contract IGeneMixer is FroggyBase {
 
     address public gameAddress;
 
-    constructor (address _gameAddress){
-        gameAddress = _gameAddress;
-    }
+    constructor (address _admin) FroggyBase() { }
 
     /// @dev Modifer for functions only accessible to the game.
     modifier onlyGame() {
@@ -16,5 +16,5 @@ abstract contract GeneMixerInterface {
         _;
     }
 
-    function mixGenes(uint192 gene1, uint192 gene2) virtual public view returns (uint192);
+    function mixGenes(genes calldata gene1, genes calldata gene2) virtual public view returns (genes memory);
 }

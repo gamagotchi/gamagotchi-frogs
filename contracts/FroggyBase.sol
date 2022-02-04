@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.0;
 
@@ -10,14 +10,20 @@ import "./FroggyAccessControl.sol";
  */
 abstract contract FroggyBase is FroggyAccessControl {
 
+    struct genes {
+        uint16 head;
+        uint16 eyes;
+        uint16 body;
+        uint16 accessory;
+
+        uint8 color;
+        uint8 eyeColor;
+    }
+
     struct Frog {
-        uint256 genes;
+        genes genes;
 
-        uint64 cooldownEndBlock;
-
-        uint32 matronId;    
-        uint32 sireId;
-
+        uint32[2] parentIds;
         uint16 generation;
     }
 

@@ -2,12 +2,13 @@
 
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "./FroggyBase.sol";
 import "./LilypadOwnership.sol";
 
 /**
  * @title FroggyOwnership
- * Facet that manages ERC1155 implementation of frogs
+ * Facet that manages ERC721 implementation of frogs
  */
 abstract contract FroggyOwnership is FroggyBase, LilypadOwnership {
 
@@ -15,68 +16,48 @@ abstract contract FroggyOwnership is FroggyBase, LilypadOwnership {
 
     uint8 totalReleased = 0;
 
-    uint32 nonce = 0;
+    uint256 nonce = 0;
     Frog[] frogs;
 
-    constructor(address _admin) ERC1155("url for {id}") { 
+    // TODO: Add URL
+    constructor(address _admin, uint256 seedAmount) ERC1155("PLACEHOLDER_URL") { 
         admin = _admin;
-
-        // Dummy frog for maintaing index of frogs
+        _mintLilypads(seedAmount);
+        
+        // Dummy / NULL frog
         frogs.push(Frog({
-            genes: 0,
-            cooldownEndBlock: 0,
-            matronId: 0,
-            sireId: 0,
+            genes: genes(0, 0, 0, 0, 0, 0),
+            parentIds: [uint32(0), uint32(0)],
             generation: 0
         }));
     }
 
-    function _createFrog(uint256 _genes, uint32 _matronId, uint32 _sireId, uint16 _generation) internal {
+    /// @dev Add a newly bred frog into the 
+    function _createFrog(genes memory _genes, uint32 parent1, uint32 parent2, uint16 _generation) internal {
         _mint(msg.sender, ++nonce, 1, "");
 
         frogs.push(Frog({
             genes: _genes,
-            cooldownEndBlock: 0,
-            matronId: _matronId,
-            sireId: _sireId,
+            parentIds: [parent1, parent2],
             generation: _generation
         }));
         
     }
 
-    function releaseFrog(uint256 _genes) external onlyAdmin() {
+    /// @dev Mints a frog. Only available to admin.
+    function releaseFrog(genes memory _genes) external onlyAdmin() {
         require(totalReleased < maxReleased, "Cannot release more new frogs");
 
-        _mint(admin, ++nonce, 1, "");
-        
-        frogs.push(Frog({
-            genes: _genes,
-            cooldownEndBlock: 0,
-            matronId: 0,
-            sireId: 0,
-            generation: 0
-        }));
+        _createFrog(_genes, 0, 0, 0);
 
         totalReleased++;
     }
 
-    function getFrogsEncoded(address _account) external view returns (bytes memory) {
-        bytes memory ownedFrogs = "";
-        
-        uint16 ptr = 0;
-        for (uint32 i = 1; i <= nonce; i++) {
-            if (balanceOf(_account, i) == 0) continue;
-            
-            ownedFrogs = abi.encodePacked(ownedFrogs, i);
-            if (ptr >= 4096) break;
-        }
-
-        return ownedFrogs;
-    }
-
-    function getGenes(uint32 frogId) public view returns (uint256) {
+    /// @dev Get frog metadata by id.
+    function getFrog(uint32 frogId) public view returns (Frog memory) {
         require(frogId != 0, "Not a valid frog");
+        require(frogId < nonce, "Not a valid frog");
 
-        return frogs[frogId].genes;
+        return frogs[frogId];
     }
 }

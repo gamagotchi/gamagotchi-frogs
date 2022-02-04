@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.6+commit.11564f7e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -42,7 +42,7 @@
 		"compilationTarget": {
 			"contracts/FroggyBase.sol": "FroggyBase"
 		},
-		"evmVersion": "london",
+		"evmVersion": "berlin",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -55,19 +55,19 @@
 	},
 	"sources": {
 		"contracts/FroggyAccessControl.sol": {
-			"keccak256": "0xf156e9e48fe0aa6b9fa8df01b15907f3e754810c22286d554a03055a5a4f1658",
+			"keccak256": "0xf4e41a66a073b0163f5dcc992569aa2b125a66dbdb7762cda207b8cb0cfa1270",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://cb91146e8506699bc885df6ade07784e2d0e408c6d3ab7ad44e0a9be15f0fef2",
-				"dweb:/ipfs/QmZApCjyTfxWgckwMDBWrpqV65eNDiaqPjeNxCBeN4ygFz"
+				"bzz-raw://183efdc41876957419464235e9a7b4eaa07195447053f44acebd2aace19f0b2f",
+				"dweb:/ipfs/QmNhKZHAN9LnSRVAtZ7RZkjghhW24fQrGJW93GdN14TWSQ"
 			]
 		},
 		"contracts/FroggyBase.sol": {
-			"keccak256": "0x169b7a41af7f4997973b78e7dffdd1e13d8d42cd3ffc8be1be77bb47dc3dc2c7",
-			"license": "MIT",
+			"keccak256": "0xa77e16e358bfa30e9ba08f3f8aaa79ba27bf0b422b8e0ba0f4811cd2048e3d29",
+			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://bc751e513c6ec1e157fec2a1bbc732650a72a2924f45c71feffaaa824b8929f7",
-				"dweb:/ipfs/QmTv983bo6bNgEdUMMjvRUUn9d35tzshgg5Gg5Yo1u2dvo"
+				"bzz-raw://b2ebbb2d629bc9bdc0115ea0a65161e823fc51231b3bdb2617089040a9d98110",
+				"dweb:/ipfs/QmTB7Zwzfu5Lo5x4ZVPVosrMeBM9EwZEy5TNKkPcXnZXPA"
 			]
 		}
 	},
